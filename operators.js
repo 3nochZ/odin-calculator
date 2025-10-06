@@ -34,3 +34,23 @@ export function divide(a, b) {
     }
     return a / b;
 }
+
+export function operate(operator, a, b) {
+    switch(operator){
+        case '+':
+            return add(Number(a),Number(b));
+            break;
+        case '-':
+            return subtract(a,b);
+            break;
+        case '*':
+            return multiply(a,b);
+            break;
+        case '/':
+            return divide(a,b);
+            break
+        default:
+            throw new SyntaxError('Invalid Operation');
+    }
+
+}

@@ -1,4 +1,6 @@
 import {add, subtract, multiply, divide} from './operators.js';
+import { isNumber, isAlphaOrNum, isInputValid, isOperator } from './checkers.js';
+import { reduceArray, regexSeparator, operatorCounter } from './simplify.js';
 
 console.log(add(1, 2));
 
@@ -24,8 +26,44 @@ input.classList.add('inputArea');
 // input.style.order = "1";
 calcContainer.prepend(input);
 
+let containerArr = []; //container for everything
+let str = '';
+const numContainer = [];
+const operatorContainer = []
+
 calcContainer.addEventListener('click', (event) => {
-    // input.value = "aa"
-    input.value += event.target.textContent;
-    // console.log(event.target.value);
+    const btn = event.target.closest("button");
+    if (!btn) return;
+
+    const text = btn.textContent;
+    
+    if (text == '='){
+        console.log('=');
+    }
+    else if (text == 'C'){
+        input.value = '';
+        containerArr = [];
+        str = '';
+    }
+    else {
+        input.value += text;
+        str += text;
+        let count = operatorCounter([str]);
+        if (count > 1) {
+            containerArr = [str];
+            const separatedArr = regexSeparator(containerArr);
+            input.value = reduceArray(separatedArr)
+            .filter(item => item !== ',')
+            .join('')
+
+            //reset count
+            str = input.value;
+            count  = operatorCounter([str]);
+        }
+        
+        // reduceArray(separatedArr);
+    }
 })
+
+//Mr. array function lol
+// const equalBtn = document.querySelector('=');

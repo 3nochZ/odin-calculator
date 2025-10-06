@@ -27,6 +27,7 @@ button {
     height: 100px;
     /* justify-self: right; */
     justify-self: end;
+    margin: 10px;
 }
 
 .inputArea{
