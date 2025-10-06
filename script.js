@@ -1,4 +1,4 @@
-import {add, subtract, multiply, divide} from './operators.js';
+import {add, subtract, multiply, divide, operate} from './operators.js';
 import { isNumber, isAlphaOrNum, isInputValid, isOperator } from './checkers.js';
 import { reduceArray, regexSeparator, operatorCounter } from './simplify.js';
 
@@ -39,6 +39,10 @@ calcContainer.addEventListener('click', (event) => {
     
     if (text == '='){
         console.log('=');
+        str = input.value;
+        containerArr = [str];
+        const separatedArr = regexSeparator(containerArr);
+        input.value = operate(separatedArr[1], separatedArr[0], separatedArr[2]);
     }
     else if (text == 'C'){
         input.value = '';
