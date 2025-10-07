@@ -28,11 +28,10 @@ calcContainer.prepend(input);
 
 let containerArr = []; //container for everything
 let str = '';
-const numContainer = [];
-const operatorContainer = []
 
 function handleInput(text) {
      if (text == '='){
+        if (containerArr.length === 0) throw new SyntaxError("No Input Detected!")
         str = input.value;
         containerArr = [str];
         const separatedArr = regexSeparator(containerArr);
@@ -42,6 +41,12 @@ function handleInput(text) {
         input.value = '';
         containerArr = [];
         str = '';
+    }
+    else if (text == 'X') {
+        if (str == '') return
+        const newValue = str.substring(0, str.length -1);
+        str = newValue;
+        input.value = newValue;
     }
     else {
         input.value += text;
@@ -72,7 +77,7 @@ calcContainer.addEventListener('click', (event) => {
 });
 
 calcContainer.addEventListener('keydown', (event) => {
-    const allowed = /^[0-9=Cc+/*-]$/; //valid inputs
+    const allowed = /^[0-9=Cc+/*-\.]$/; //valid inputs
     // input.type = "text";
     // input.pattern = [0-9];
     if (allowed.test(event.key)){
@@ -83,6 +88,11 @@ calcContainer.addEventListener('keydown', (event) => {
         else {
             handleInput(event.key);
         }
+    }
+    else if (event.key == 'Backspace'){
+        // console.log("B");
+        //logic
+        handleInput('X');
     }
     else {
         event.preventDefault();
