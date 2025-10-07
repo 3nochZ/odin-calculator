@@ -1,3 +1,9 @@
+:root{
+    --width: 100px;
+    --button-margin: 5px;
+}
+
+
 * {
     padding: 0px;
     margin: 0px;
@@ -23,7 +29,7 @@ body {
 
 button {
     /* padding: 20px; */
-    width: 100px;
+    width: var(--width);
     height: 100px;
     /* justify-self: right; */
     justify-self: end;
@@ -36,4 +42,22 @@ button {
     height: 100px;
     font-size: 60px;
     text-align: right;
+}
+
+button {
+    font-size: 30px;
+    color: darkolivegreen
+}
+
+.X, .C{
+    color: lightcoral;
+    /* font-size: 100px; */
+}
+
+.\+, .\-, .\*, .\/, .\={
+    color: violet
+}
+
+.C, .\= {
+    width: calc(var(--width) * 2 + var(--button-margin) * 2)
 }
