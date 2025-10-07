@@ -1,8 +1,8 @@
 import {add, subtract, multiply, divide, operate} from './operators.js';
 import { isNumber, isAlphaOrNum, isInputValid, isOperator } from './checkers.js';
-import { reduceArray, regexSeparator, operatorCounter } from './simplify.js';
+import { reduceArray, regexSeparator, operatorCounter, roundTo2f } from './simplify.js';
 
-console.log(add(1, 2));
+// console.log(add(1, 2));
 
 //create UI
 const body =  document.querySelector('body');
@@ -31,18 +31,12 @@ let str = '';
 const numContainer = [];
 const operatorContainer = []
 
-calcContainer.addEventListener('click', (event) => {
-    const btn = event.target.closest("button");
-    if (!btn) return;
-
-    const text = btn.textContent;
-    
-    if (text == '='){
-        console.log('=');
+function handleInput(text) {
+     if (text == '='){
         str = input.value;
         containerArr = [str];
         const separatedArr = regexSeparator(containerArr);
-        input.value = operate(separatedArr[1], separatedArr[0], separatedArr[2]);
+        input.value = roundTo2f(operate(separatedArr[1], separatedArr[0], separatedArr[2]));
     }
     else if (text == 'C'){
         input.value = '';
@@ -52,10 +46,12 @@ calcContainer.addEventListener('click', (event) => {
     else {
         input.value += text;
         str += text;
+        console.log(str);
         let count = operatorCounter([str]);
         if (count > 1) {
             containerArr = [str];
             const separatedArr = regexSeparator(containerArr);
+            console.log(separatedArr);
             input.value = reduceArray(separatedArr)
             .filter(item => item !== ',')
             .join('')
@@ -64,10 +60,31 @@ calcContainer.addEventListener('click', (event) => {
             str = input.value;
             count  = operatorCounter([str]);
         }
-        
-        // reduceArray(separatedArr);
+    }
+}
+
+calcContainer.addEventListener('click', (event) => {
+    const btn = event.target.closest("button");
+    if (!btn) return;
+
+    const text = btn.textContent;
+    handleInput(text);
+});
+
+calcContainer.addEventListener('keydown', (event) => {
+    const allowed = /^[0-9=Cc+/*-]$/; //valid inputs
+    // input.type = "text";
+    // input.pattern = [0-9];
+    if (allowed.test(event.key)){
+        event.preventDefault();
+        if (event.key.toLowerCase() == 'c'){
+            handleInput('C');
+        }
+        else {
+            handleInput(event.key);
+        }
+    }
+    else {
+        event.preventDefault();
     }
 })
-
-//Mr. array function lol
-// const equalBtn = document.querySelector('=');
