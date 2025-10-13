@@ -34,6 +34,7 @@ let str = '';
 function handleInput(text) {
      if (text == '='){
         if (containerArr.length === 0) throw new SyntaxError("No Input Detected!")
+        // else if(separatedArr[1])
         str = input.value;
         containerArr = [str];
         const separatedArr = regexSeparator(containerArr);

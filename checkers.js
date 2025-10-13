@@ -15,3 +15,11 @@ export function isInputValid(char) {
 export function isOperator(char) {
     return /^[+/*-]$/.test(char);
 }
+
+export function checkConsOper(arr) { //checks whether consecutive operators exist
+     if (arr.length >= 3){
+        if (isOperator(arr[1]) && isOperator(arr[2]) && arr[2] !== '-') {
+           return true;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { isNumber } from "./checkers.js";
 
 export function add(a, b) {
     if (!isNumber(a) || !isNumber(b)) {
-        throw new TypeError("Invalid type");
+        throw new TypeError("Operate +: Invalid Types");
     }
 
     return a + b;    
@@ -10,7 +10,7 @@ export function add(a, b) {
 
 export function subtract(a, b) {
     if (!isNumber(a) || !isNumber(b)) {
-        throw new TypeError("Invalid type");
+        throw new TypeError("Operate -: Invalid Types");
     }
 
     return a - b;
@@ -18,7 +18,7 @@ export function subtract(a, b) {
 
 export function multiply(a, b) {
     if (!isNumber(a) || !isNumber(b)) {
-        throw new TypeError("Invalid type");
+        throw new TypeError("Operate *: Invalid Types");
     }
 
     return a * b;
@@ -26,7 +26,7 @@ export function multiply(a, b) {
 
 export function divide(a, b) {
     if (!isNumber(a) || !isNumber(b)) {
-        throw new TypeError("Invalid type");
+        throw new TypeError("Operate /: Invalid Types");
     }
 
     else if (b == 0) {
@@ -50,7 +50,7 @@ export function operate(operator, a, b) {
             return divide(a,b);
             break
         default:
-            throw new SyntaxError('Invalid Operation');
+            throw new SyntaxError('Operate Fn: Invalid Operation');
     }
 
 }
