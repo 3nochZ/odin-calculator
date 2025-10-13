@@ -1,0 +1,6 @@
+node_modules/
+
+babel*
+*jest*
+*.json
+*test*
